@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.msevent.ms_event_manager.entities.Event;
+import com.msevent.ms_event_manager.entities.dto.EventRequestDto;
 import com.msevent.ms_event_manager.services.impl.EventServiceImpl;
 
 import java.util.List;
@@ -24,15 +25,15 @@ public class EventController {
     @Autowired
     private EventServiceImpl eventServiceImpl;
     
+    @PostMapping("/create-event")
+    public ResponseEntity<Event> createEvent(@RequestBody EventRequestDto eventRequestDto) {
+        Event createdEvent = eventServiceImpl.createEvent(eventRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdEvent);
+    }
+
     @GetMapping("/get-all-events")
     public ResponseEntity<List<Event>> getMethodName() {
         List<Event> events = eventServiceImpl.getEvents();
         return ResponseEntity.status(HttpStatus.OK).body(events);
-    }
-
-    @PostMapping("/create-event")
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        Event createdEvent = eventServiceImpl.createEvent(event);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdEvent);
     }
 }

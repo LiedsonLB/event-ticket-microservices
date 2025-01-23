@@ -5,15 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.msevent.ms_event_manager.entities.AddressCreate;
 import com.msevent.ms_event_manager.entities.Event;
+import com.msevent.ms_event_manager.entities.dto.EventRequestDto;
+import com.msevent.ms_event_manager.exceptions.EntityNotFoundException;
 import com.msevent.ms_event_manager.repositories.EventRepository;
 import com.msevent.ms_event_manager.services.EventService;
+import com.msevent.ms_event_manager.services.ViaCepClient;
 
 @Service
 public class EventServiceImpl implements EventService {
 
     @Autowired
-    EventRepository eventRepository;
+    private EventRepository eventRepository;
+
+    @Autowired
+    private ViaCepClient viaCepClient;
 
     @Override
     public List<Event> getEvents() {
@@ -22,33 +29,52 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event getEventById(String id) {
-        return eventRepository.findById(id).orElse(null);
+        return eventRepository.findById(id).orElseThrow(
+            () -> new EntityNotFoundException(String.format("Event with id: %s not found in the database", id))
+        );
     }
 
     @Override
-    public Event createEvent(Event event) {
+    public Event createEvent(EventRequestDto eventRequestDto) {
+        AddressCreate address = viaCepClient.getAddressByCep(eventRequestDto.getCep());
+
+        Event event = new Event();
+        event.setEventName(eventRequestDto.getEventName());
+        event.setEventDateTime(eventRequestDto.getEventDateTime());
+        event.setCep(eventRequestDto.getCep());
+        
+        event.setLogradouro(address.getLogradouro());
+        event.setBairro(address.getBairro());
+        event.setCidade(address.getLocalidade());
+        event.setUf(address.getUf());
+
         return eventRepository.save(event);
     }
 
     @Override
-    public Event updateEvent(String id, Event event) {
-        Event eventToUpdate = eventRepository.findById(id).orElse(null);
-        if (eventToUpdate == null) {
-            return null;
-        }
-        eventToUpdate.setEventName(event.getEventName());
-        eventToUpdate.setEventDateTime(event.getEventDateTime());
-        eventToUpdate.setCep(event.getCep());
-        eventToUpdate.setLogradouro(event.getLogradouro());
-        eventToUpdate.setBairro(event.getBairro());
-        eventToUpdate.setCidade(event.getCidade());
-        eventToUpdate.setUf(event.getUf());
+    public Event updateEvent(String id, EventRequestDto eventRequestDto) {
+        Event eventToUpdate = eventRepository.findById(id).orElseThrow(
+            () -> new EntityNotFoundException(String.format("Event with id: %s not found in the database", id))
+        );
+
+        eventToUpdate.setEventName(eventRequestDto.getEventName());
+        eventToUpdate.setEventDateTime(eventRequestDto.getEventDateTime());
+        eventToUpdate.setCep(eventRequestDto.getCep());
+
+        AddressCreate address = viaCepClient.getAddressByCep(eventRequestDto.getCep());
+        eventToUpdate.setLogradouro(address.getLogradouro());
+        eventToUpdate.setBairro(address.getBairro());
+        eventToUpdate.setCidade(address.getLocalidade());
+        eventToUpdate.setUf(address.getUf());
+
         return eventRepository.save(eventToUpdate);
     }
 
     @Override
     public void deleteEvent(String id) {
+        if(!eventRepository.existsById(id)) {
+            throw new EntityNotFoundException(String.format("Event with id: %s not found in the database", id));
+        }
         eventRepository.deleteById(id);
     }
-
 }
