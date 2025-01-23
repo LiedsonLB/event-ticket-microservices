@@ -5,3 +5,9 @@ spring:
         mongodb:
             uri: mongodb+srv://admin:admin@challenge3.axgt4.mongodb.net/?retryWrites=true&w=majority&appName=challenge3
             database: db_event
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /swagger-ui.html
+    enabled: true

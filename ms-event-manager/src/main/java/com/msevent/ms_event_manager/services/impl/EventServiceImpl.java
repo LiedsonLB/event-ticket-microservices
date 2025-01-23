@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.msevent.ms_event_manager.entities.AddressCreate;
+import com.msevent.ms_event_manager.entities.AddressResponse;
 import com.msevent.ms_event_manager.entities.Event;
 import com.msevent.ms_event_manager.entities.dto.EventRequestDto;
 import com.msevent.ms_event_manager.exceptions.EntityNotFoundException;
 import com.msevent.ms_event_manager.repositories.EventRepository;
 import com.msevent.ms_event_manager.services.EventService;
-import com.msevent.ms_event_manager.services.ViaCepClient;
+import com.msevent.ms_event_manager.services.client.ViaCepClient;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -36,7 +36,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event createEvent(EventRequestDto eventRequestDto) {
-        AddressCreate address = viaCepClient.getAddressByCep(eventRequestDto.getCep());
+        AddressResponse address = viaCepClient.getInfo(eventRequestDto.getCep());
 
         Event event = new Event();
         event.setEventName(eventRequestDto.getEventName());
@@ -61,7 +61,7 @@ public class EventServiceImpl implements EventService {
         eventToUpdate.setEventDateTime(eventRequestDto.getEventDateTime());
         eventToUpdate.setCep(eventRequestDto.getCep());
 
-        AddressCreate address = viaCepClient.getAddressByCep(eventRequestDto.getCep());
+        AddressResponse address = viaCepClient.getInfo(eventRequestDto.getCep());
         eventToUpdate.setLogradouro(address.getLogradouro());
         eventToUpdate.setBairro(address.getBairro());
         eventToUpdate.setCidade(address.getLocalidade());

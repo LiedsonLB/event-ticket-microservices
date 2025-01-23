@@ -6,8 +6,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
+@EnableFeignClients
 @EnableMongoRepositories(basePackages = "com.msevent.ms_event_manager.repositories")
-@EnableFeignClients()
 public class MsEventManagerApplication {
 
 	public static void main(String[] args) {

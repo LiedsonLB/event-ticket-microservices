@@ -3,10 +3,10 @@ package com.msevent.ms_event_manager.entities.dto.mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.msevent.ms_event_manager.entities.AddressCreate;
+import com.msevent.ms_event_manager.entities.AddressResponse;
 import com.msevent.ms_event_manager.entities.Event;
 import com.msevent.ms_event_manager.entities.dto.EventRequestDto;
-import com.msevent.ms_event_manager.services.ViaCepClient;
+import com.msevent.ms_event_manager.services.client.ViaCepClient;
 
 public class EventMapper {
     @Autowired
@@ -17,7 +17,7 @@ public class EventMapper {
     }
 
     public Event toEventResponseDto(EventRequestDto eventRequestDto) {
-        AddressCreate address = viaCepClient.getAddressByCep(eventRequestDto.getCep());
+        AddressResponse address = viaCepClient.getInfo(eventRequestDto.getCep());
 
         Event eventResponseDto = new Event();
         eventResponseDto.setEventName(eventRequestDto.getEventName());
