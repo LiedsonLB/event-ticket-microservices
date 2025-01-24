@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import java.util.List;
@@ -26,18 +27,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Tag(name = "ms-event-management API", description = "API for managing events.")
+@Tag(name = "ms-event-management", description = "API for managing events.")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/events")
 public class EventController {
 
     @Autowired
-    private EventServiceImpl eventServiceImpl;
+    private final EventServiceImpl eventServiceImpl;
 
     @Operation(summary = "Create a new event.", responses = {
             @ApiResponse(responseCode = "201", description = "Event created successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Event.class))),
             @ApiResponse(responseCode = "422", description = "Invalid data provided", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-
+            @ApiResponse(responseCode = "409", description = "Conflict - Event already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
     @PostMapping("/create-event")
     public ResponseEntity<Event> createEvent(@RequestBody EventRequestDto eventRequestDto) {
