@@ -6,12 +6,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 @Document(collection = "events")
 public class Event {
     @Id
@@ -31,4 +30,13 @@ public class Event {
     @Field("uf")
     private String uf;
 
+    public Event(String eventName, LocalDateTime eventDateTime, String cep, String logradouro, String bairro, String cidade, String uf) {
+        this.eventName = eventName;
+        this.eventDateTime = eventDateTime;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
 }

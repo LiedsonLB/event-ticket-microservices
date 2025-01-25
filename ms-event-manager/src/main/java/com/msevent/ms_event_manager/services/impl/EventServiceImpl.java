@@ -36,6 +36,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event createEvent(EventRequestDto eventRequestDto) {
+        
         AddressResponse address = viaCepClient.getInfo(eventRequestDto.getCep());
 
         Event event = new Event();

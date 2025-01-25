@@ -20,4 +20,11 @@ public class AddressResponse {
     private String gia;
     private String ddd;
     private String siafi;
+    
+    public AddressResponse(String logradouro, String bairro, String localidade, String uf) {
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.localidade = localidade;
+        this.uf = uf;
+    }
 }

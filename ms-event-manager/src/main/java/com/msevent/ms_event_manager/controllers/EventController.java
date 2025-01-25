@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
@@ -42,7 +43,7 @@ public class EventController {
             @ApiResponse(responseCode = "409", description = "Conflict - Event already exists", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
     @PostMapping("/create-event")
-    public ResponseEntity<Event> createEvent(@RequestBody EventRequestDto eventRequestDto) {
+    public ResponseEntity<Event> createEvent(@Valid @RequestBody EventRequestDto eventRequestDto) {
         Event createdEvent = eventServiceImpl.createEvent(eventRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEvent);
     }
