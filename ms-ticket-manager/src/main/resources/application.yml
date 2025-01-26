@@ -1,0 +1,22 @@
+spring:
+    application:
+        name: ms-ticket-manager
+    data:
+        mongodb:
+            uri: mongodb+srv://admin:admin@challenge3.axgt4.mongodb.net/?retryWrites=true&w=majority&appName=challenge3
+            database: db_ticket
+    rabbitmq:
+        queue: ticket-queue
+        host: hostname
+        username: usuario
+        password: senha
+        port: 5671
+        virtual-host: vhost
+        ssl:
+            enabled: true
+springdoc:
+  api-docs:
+    path: /v1/api-ticket-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  packages-to-scan: com.msticket.ms_ticket_manager.controllers
