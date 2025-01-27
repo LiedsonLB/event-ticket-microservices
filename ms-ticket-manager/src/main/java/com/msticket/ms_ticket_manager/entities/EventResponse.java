@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class EventResponse {
-    private String id;
+    private String eventId;
     private String eventName;
     private LocalDateTime eventDateTime;
     private String logradouro;
