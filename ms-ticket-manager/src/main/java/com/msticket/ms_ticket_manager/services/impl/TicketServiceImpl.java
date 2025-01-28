@@ -5,14 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.msticket.ms_ticket_manager.entities.EventResponse;
 import com.msticket.ms_ticket_manager.entities.Ticket;
 import com.msticket.ms_ticket_manager.entities.dto.TicketRequestDto;
+import com.msticket.ms_ticket_manager.entities.dto.TicketResponseDto;
 import com.msticket.ms_ticket_manager.entities.dto.mapper.TicketMapper;
 import com.msticket.ms_ticket_manager.repositories.TicketRepository;
 import com.msticket.ms_ticket_manager.services.TicketService;
-import com.msticket.ms_ticket_manager.services.client.EventClient;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class TicketServiceImpl implements TicketService {
 
@@ -22,45 +24,49 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private TicketMapper ticketMapper;
 
-    @Autowired
-    private EventClient eventClient;
-
     @Override
-    public Ticket createTicket(TicketRequestDto ticketRequestDto) {
-        Ticket ticket = ticketMapper.toTicket(ticketRequestDto);
+    public TicketResponseDto createTicket(TicketRequestDto ticketRequestDto) {
+        
+        Ticket savedTicket = ticketMapper.toTicket(ticketRequestDto);
 
-        Ticket savedTicket = ticketRepository.save(ticket);
+        savedTicket.setStatus("concluído");
 
-        return savedTicket;
+        ticketRepository.save(savedTicket);
+
+        TicketResponseDto ticketResponseDto = ticketMapper.toTicketResponseDto(savedTicket);
+
+        return ticketResponseDto;
     }
 
     @Override
-    public Ticket getTicketById(String ticketId) {
+    public TicketResponseDto getTicketById(String ticketId) {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket não encontrado"));
 
-        return ticket;
+        TicketResponseDto ticketResponseDto = ticketMapper.toTicketResponseDto(ticket);
+        return ticketResponseDto;
     }
 
     @Override
-    public Ticket updateTicket(String ticketId, TicketRequestDto ticketRequestDto) {
+    public TicketResponseDto updateTicket(String ticketId, TicketRequestDto ticketRequestDto) {
         Ticket existingTicket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket não encontrado"));
 
         existingTicket.setCpf(ticketRequestDto.getCpf());
         existingTicket.setCustomerName(ticketRequestDto.getCustomerName());
         existingTicket.setCustomerMail(ticketRequestDto.getCustomerMail());
-        existingTicket.setBrlAmount(ticketRequestDto.getBrlAmount());
-        existingTicket.setUsdAmount(ticketRequestDto.getUsdAmount());
+        existingTicket.setBRLamount(ticketRequestDto.getBRLamount());
+        existingTicket.setUSDamount(ticketRequestDto.getUSDamount());
 
-        EventResponse eventResponse = eventClient.getEventById(ticketRequestDto.getEventId());
-        existingTicket.setEvent(eventResponse);
+        existingTicket.setEventId(ticketRequestDto.getEventId());
 
         existingTicket.setEventName(ticketRequestDto.getEventName());
 
-        Ticket updatedTicket = ticketRepository.save(existingTicket);
+        ticketRepository.save(existingTicket);
 
-        return updatedTicket;
+        TicketResponseDto ticketResponseDto = ticketMapper.toTicketResponseDto(existingTicket);
+
+        return ticketResponseDto;
     }
 
     @Override
@@ -68,11 +74,12 @@ public class TicketServiceImpl implements TicketService {
         Ticket existingTicket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket não encontrado"));
 
-        ticketRepository.delete(existingTicket);
+        existingTicket.setStatus("cancelado");
+        ticketRepository.save(existingTicket);
     }
 
     @Override
-    public Ticket checkTicketByEvent(String eventId) {
+    public TicketResponseDto checkTicketByEvent(String eventId) {
         return null;
     }
 

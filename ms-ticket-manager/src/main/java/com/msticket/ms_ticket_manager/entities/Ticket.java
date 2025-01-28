@@ -17,9 +17,7 @@ import lombok.Setter;
 public class Ticket {
     @Id
     private String id;
-    // validation do ticketId
-    @Size(max = 50, message = "ticketId cannot exceed 50 characters")
-    private String ticketId;
+    private int ticketId;
     @NotBlank(message = "cpf cannot be empty")
     private String cpf;
     @NotBlank(message = "customerName cannot be empty")
@@ -28,13 +26,13 @@ public class Ticket {
     @Pattern(regexp = "\\d{5}-?\\d{3}", message = "Invalid CEP format")
     @Email(message = "Invalid email format")
     private String customerMail;
-    private EventResponse event;
+    private String eventId;
     @Size(max = 100, message = "eventName cannot exceed 150 characters")
     private String eventName;
     @Pattern(regexp = "R\\$\\s?\\d+(,\\d{2})?", message = "Invalid BRL amount format")
-    private String brlAmount;
+    private String BRLamount;
     @Pattern(regexp = "R\\$\\s?\\d+(,\\d{2})?", message = "Invalid BRL amount format")
-    private String usdAmount;
+    private String USDamount;
     @Pattern(regexp = "^(concluído|cancelado)$", message = "Invalid status. Must be 'concluído' or 'pendente'")
     private String status;
 }

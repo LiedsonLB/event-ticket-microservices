@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 
 import com.msticket.ms_ticket_manager.entities.Ticket;
 import com.msticket.ms_ticket_manager.entities.dto.TicketRequestDto;
+import com.msticket.ms_ticket_manager.entities.dto.TicketResponseDto;
 
 @Service
 public interface TicketService {
-    public Ticket createTicket(TicketRequestDto ticketRequestDto);
-    public Ticket getTicketById(String ticketId);
-    public Ticket updateTicket(String ticketId, TicketRequestDto ticketRequestDto);
+    public TicketResponseDto createTicket(TicketRequestDto ticketRequestDto);
+    public TicketResponseDto getTicketById(String ticketId);
+    public TicketResponseDto updateTicket(String ticketId, TicketRequestDto ticketRequestDto);
     public void deleteTicket(String ticketId);
-    public Ticket checkTicketByEvent(String eventId);
+    public TicketResponseDto checkTicketByEvent(String eventId);
     public List<Ticket> getAllTickets();
 }

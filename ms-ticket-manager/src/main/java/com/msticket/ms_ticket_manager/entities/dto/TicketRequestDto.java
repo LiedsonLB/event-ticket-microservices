@@ -12,6 +12,6 @@ public class TicketRequestDto {
     private String customerMail;
     private String eventId;
     private String eventName;
-    private String brlAmount;
-    private String usdAmount;
+    private String BRLamount;
+    private String USDamount;
 }
