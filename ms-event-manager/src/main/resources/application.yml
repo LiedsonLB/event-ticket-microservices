@@ -1,0 +1,13 @@
+spring:
+  application:
+      name: ms-event-manager
+  data:
+      mongodb:
+        uri: mongodb+srv://admin:admin@challenge3.axgt4.mongodb.net/?retryWrites=true&w=majority&appName=challenge3
+        database: db_event
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  packages-to-scan: com.msevent.ms_event_manager.controllers
