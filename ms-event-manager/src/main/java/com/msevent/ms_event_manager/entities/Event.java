@@ -1,7 +1,5 @@
 package com.msevent.ms_event_manager.entities;
 
-import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -18,7 +16,7 @@ public class Event {
     @Field("eventName")
     private String eventName;
     @Field("dateTime")
-    private LocalDateTime eventDateTime;
+    private String eventDateTime;
     @Field("cep")
     private String cep;
     @Field("logradouro")
@@ -30,7 +28,7 @@ public class Event {
     @Field("uf")
     private String uf;
 
-    public Event(String eventName, LocalDateTime eventDateTime, String cep, String logradouro, String bairro, String cidade, String uf) {
+    public Event(String eventName, String eventDateTime, String cep, String logradouro, String bairro, String cidade, String uf) {
         this.eventName = eventName;
         this.eventDateTime = eventDateTime;
         this.cep = cep;

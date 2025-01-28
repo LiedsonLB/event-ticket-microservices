@@ -8,8 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.assertj.core.api.Assertions;
 
-import java.time.LocalDateTime;
-
 import com.msevent.ms_event_manager.entities.Event;
 import com.msevent.ms_event_manager.entities.dto.EventRequestDto;
 
@@ -23,7 +21,7 @@ public class EventControllerTest {
     public void createProduct_WithValidData_Returns201() {
         EventRequestDto requestDto = new EventRequestDto(
                 "Event Name",
-                LocalDateTime.now(),
+                "2021-10-10T10:00:00",
                 "64260000");
 
         Event sut = webTestClient
@@ -46,7 +44,7 @@ public class EventControllerTest {
     public void createProduct_WithInvalidData_Returns422() {
         EventRequestDto requestDto = new EventRequestDto(
                 "",
-                LocalDateTime.now(),
+                "2021-10-10T10:00:00",
                 "64260000");
 
         webTestClient
@@ -63,7 +61,7 @@ public class EventControllerTest {
     public void createProduct_WithInvalidCep_Returns422() {
         EventRequestDto requestDto = new EventRequestDto(
                 "Event Name",
-                LocalDateTime.now(),
+                "2021-10-10T10:00:00",
                 "6426000");
 
         webTestClient
@@ -79,7 +77,7 @@ public class EventControllerTest {
     public void createProduct_WithInvalidCep_Returns400() {
         EventRequestDto requestDto = new EventRequestDto(
                 "Event Name",
-                LocalDateTime.now(),
+                "2021-10-10T10:00:00",
                 "1234567890");
 
         webTestClient
@@ -113,7 +111,7 @@ public class EventControllerTest {
     public void getEventById_Returns200() {
         EventRequestDto requestDto = new EventRequestDto(
                 "Event Name",
-                LocalDateTime.now(),
+                "2021-10-10T10:00:00",
                 "64260000");
 
         String eventId = webTestClient
@@ -148,7 +146,7 @@ public class EventControllerTest {
     public void updateEvent_Returns200() {
         EventRequestDto requestDto = new EventRequestDto(
                 "Event UPDATE Name",
-                LocalDateTime.now(),
+                "2021-10-10T10:00:00",
                 "01020-000");
 
         String eventId = webTestClient
@@ -176,7 +174,7 @@ public class EventControllerTest {
     public void updateEvent_Returns404() {
         EventRequestDto requestDto = new EventRequestDto(
                 "Event UPDATE Name",
-                LocalDateTime.now(),
+                "2021-10-10T10:00:00",
                 "01020-000");
 
         webTestClient
@@ -192,7 +190,7 @@ public class EventControllerTest {
     public void deleteEvent_Returns204() {
         EventRequestDto requestDto = new EventRequestDto(
                 "Event Name",
-                LocalDateTime.now(),
+                "2021-10-10T10:00:00",
                 "64260000");
 
         String eventId = webTestClient

@@ -3,7 +3,6 @@ package com.msevent.ms_event_manager.services;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class EventServiceTest {
     public void setup() {
         event = new Event(
             "evento importante",
-            LocalDateTime.of(2021, 10, 10, 10, 0),
+            "2021-10-10T10:00:00",
             "64260000",
             "",
             "",
@@ -52,7 +51,7 @@ public class EventServiceTest {
 
         requestDto = new EventRequestDto(
             "evento importante",
-            LocalDateTime.of(2021, 10, 10, 10, 0),
+            "2021-10-10T10:00:00",
             "64260000"
         );
 

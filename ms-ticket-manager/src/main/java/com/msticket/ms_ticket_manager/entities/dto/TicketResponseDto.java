@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
 public class TicketResponseDto {
-    private int ticketId;
+    private Long ticketId;
     private String cpf;
     private String customerName;
     private String customerMail;
@@ -21,7 +21,7 @@ public class TicketResponseDto {
     private String USDtotalAmount;
     private String status;
     
-    public TicketResponseDto(int ticketId, String cpf, String customerName, String customerMail, EventResponse event, String BRLtotalAmount, String USDtotalAmount, String status) {
+    public TicketResponseDto(Long ticketId, String cpf, String customerName, String customerMail, EventResponse event, String BRLtotalAmount, String USDtotalAmount, String status) {
         this.ticketId = ticketId;
         this.cpf = cpf;
         this.customerName = customerName;

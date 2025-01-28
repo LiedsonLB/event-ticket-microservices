@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Ticket {
     @Id
     private String id;
-    private int ticketId;
+    private Long ticketId;
     @NotBlank(message = "cpf cannot be empty")
     private String cpf;
     @NotBlank(message = "customerName cannot be empty")

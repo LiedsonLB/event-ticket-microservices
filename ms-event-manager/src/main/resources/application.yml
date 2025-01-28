@@ -1,10 +1,11 @@
 spring:
   application:
-      name: ms-event-manager
+    name: ms-event-manager
   data:
-      mongodb:
-        uri: mongodb+srv://admin:admin@challenge3.axgt4.mongodb.net/?retryWrites=true&w=majority&appName=challenge3
-        database: db_event
+    mongodb:
+      uri: mongodb+srv://${MONGO_USER:admin}:${MONGO_PASSWORD:admin}@challenge3.axgt4.mongodb.net/?retryWrites=true&w=majority&appName=challenge3
+      database: ${MONGO_DB_EVENT:db_event_dev}
+
 springdoc:
   api-docs:
     path: /v3/api-docs
