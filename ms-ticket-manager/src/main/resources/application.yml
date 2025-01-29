@@ -6,14 +6,11 @@ spring:
             uri: mongodb+srv://${MONGO_USER:admin}:${MONGO_PASSWORD:admin}@challenge3.axgt4.mongodb.net/?retryWrites=true&w=majority&appName=challenge3
             database: ${MONGO_DB_TICKET:db_ticket_dev}
     rabbitmq:
-        queue: ticket-queue
-        host: hostname
-        username: usuario
-        password: senha
-        port: 5671
-        virtual-host: vhost
-        ssl:
-            enabled: true
+        addresses: ${RABBITMQ_HOST:amqps://yqhbrrvd:walVSPe0UoOEyPtKbnEYKSwIA39M2rbT@shark.rmq.cloudamqp.com/yqhbrrvd}
+
+broker:
+  queue:
+    name: default.ticket
 
 server:
   port: 8081
@@ -24,3 +21,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
   packages-to-scan: com.msticket.ms_ticket_manager.controllers
+
+logging:
+  level:
+    root: INFO
+    '[com.msticket.ms_ticket_manager]': DEBUG

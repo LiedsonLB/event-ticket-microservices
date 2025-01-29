@@ -36,12 +36,12 @@ public class TicketMapper {
 
         try {
             EventResponse eventResponse = eventClient.getEventById(ticket.getEventId());
-            log.info("Evento encontrado: {}", ticket.getEventId());
+            log.info("event found {}", ticket.getEventId());
             
             ticketResponseDto.setEvent(eventResponse);
         } catch (FeignException.NotFound ex) {
-            log.error("Evento com ID {} não encontrado: {}", ticket.getEventId(), ex.getMessage());
-            throw new EventNotFoundException("Evento não encontrado para o ID: " + ticket.getEventId() + " - " + ex.getMessage());
+            log.error("event ID {} not found: {}", ticket.getEventId(), ex.getMessage());
+            throw new EventNotFoundException("event ID not found: " + ticket.getEventId() + " - " + ex.getMessage());
         }
 
         ticketResponseDto.setBRLtotalAmount(ticket.getBRLamount());

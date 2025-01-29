@@ -12,3 +12,9 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
   packages-to-scan: com.msevent.ms_event_manager.controllers
+
+  
+logging:
+  level:
+    root: INFO
+    '[com.msevent.ms_event_manager]': DEBUG

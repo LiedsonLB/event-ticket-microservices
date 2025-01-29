@@ -11,9 +11,11 @@ import com.msticket.ms_ticket_manager.entities.dto.TicketResponseDto;
 @Service
 public interface TicketService {
     public TicketResponseDto createTicket(TicketRequestDto ticketRequestDto);
-    public TicketResponseDto getTicketById(String ticketId);
-    public TicketResponseDto updateTicket(String ticketId, TicketRequestDto ticketRequestDto);
-    public void deleteTicket(String ticketId);
-    public TicketResponseDto checkTicketByEvent(String eventId);
+    public TicketResponseDto getTicketById(Long ticketId);
+    public List<TicketResponseDto> getTicketByCpf(String cpf);
+    public TicketResponseDto updateTicket(Long ticketId, TicketRequestDto ticketRequestDto);
+    public void cancelTicketById(Long ticketId);
+    public void cancelTicketByCpf(String cpf);
+    public List<TicketResponseDto> checkTicketsByEvent(String eventId);
     public List<Ticket> getAllTickets();
 }
