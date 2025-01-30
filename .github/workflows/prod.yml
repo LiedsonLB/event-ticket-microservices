@@ -46,17 +46,17 @@ jobs:
         steps:
             - name: Pull Docker images of microservices
               run: |
-                docker pull liedsonlb/ms-event-manager:latest
-                docker pull liedsonlb/ms-ticket-manager:latest
+                sudo docker pull liedsonlb/ms-event-manager:latest
+                sudo docker pull liedsonlb/ms-ticket-manager:latest
 
             - name: Remove existing containers (if any)
               run: |
-                docker rm -f ms-event-manager || true
-                docker rm -f ms-ticket-manager || true
+                sudo docker rm -f ms-event-manager || true
+                sudo docker rm -f ms-ticket-manager || true
 
             - name: Run ms-event-manager container
               run: |
-                docker run -d -p 8081:8081 \
+                sudo docker run -d -p 8081:8081 \
                 -e MONGO_USER=${{ secrets.MONGO_USER }} \
                 -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
                 -e MONGO_DB_EVENT=${{ secrets.MONGO_DB_EVENT }} \
@@ -64,9 +64,14 @@ jobs:
 
             - name: Run ms-ticket-manager container
               run: |
-                docker run -d -p 8082:8082 \
+                sudo docker run -d -p 8082:8082 \
                 -e MONGO_USER=${{ secrets.MONGO_USER }} \
                 -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
                 -e MONGO_DB_TICKET=${{ secrets.MONGO_DB_TICKET }} \
                 -e EVENT_SERVICE_URL=${{ secrets.EC2_INSTANCE_IP }} \
                 --name ms-ticket-manager liedsonlb/ms-ticket-manager:latest
+                - name: Verify running containers
+            
+            - name: Verify running containers
+              run: |
+                sudo docker ps
