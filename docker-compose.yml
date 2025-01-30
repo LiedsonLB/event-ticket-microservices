@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  event-manager:
+    build:
+      context: ms-event-manager
+      dockerfile: Dockerfile.dev
+    container_name: event-manager
+    ports:
+      - "8080:8080"
+    restart: always
+
+  ticket-manager:
+    build:
+      context: ms-ticket-manager
+      dockerfile: Dockerfile.dev
+    container_name: ticket-manager
+    ports:
+      - "8081:8081"
+    restart: always
