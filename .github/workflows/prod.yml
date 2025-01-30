@@ -2,7 +2,7 @@ name: Deploy Tickets Application
 
 on:
     push:
-        branches: [main]
+        branches: [test-docker]
 
 jobs:
     build:
@@ -68,4 +68,5 @@ jobs:
                 -e MONGO_USER=${{ secrets.MONGO_USER }} \
                 -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
                 -e MONGO_DB_TICKET=${{ secrets.MONGO_DB_TICKET }} \
+                -e EVENT_SERVICE_URL=${{ secrets.EC2_INSTANCE_IP }} \
                 --name ms-ticket-manager liedsonlb/ms-ticket-manager:latest

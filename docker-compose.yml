@@ -5,16 +5,26 @@ services:
     build:
       context: ms-event-manager
       dockerfile: Dockerfile.dev
-    container_name: event-manager
+    container_name: ms-event-manager
     ports:
       - "8080:8080"
     restart: always
+    networks:
+      - ms_network
 
   ticket-manager:
     build:
       context: ms-ticket-manager
       dockerfile: Dockerfile.dev
-    container_name: ticket-manager
+    container_name: ms-ticket-manager
     ports:
       - "8081:8081"
+    environment:
+      - EVENT_SERVICE_URL=http://event-manager:8080
     restart: always
+    networks:
+      - ms_network
+
+networks:
+  ms_network:
+    driver: bridge
