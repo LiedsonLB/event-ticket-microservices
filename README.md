@@ -127,7 +127,16 @@ target/site/jacoco/index.html
   
 ## Imagens do Projeto
 
+## Cobertura de Testes com Jacoco
+ms-event-manager:
+![Jacoco imagem](/snapshots/event_jacoco.png)
+ms-ticket-manager:
+![Jacoco imagem](/snapshots/ticket_jacoco.png)
+
+
 ### Swagger
+![Swagger imagem](/snapshots/event_swagger.png)
+![Swagger imagem](/snapshots/ticket_swagger.png)
 
 ### Mongo Atlas Databases
 ![MongoDB imagem](/snapshots/databases_atlas.png)
@@ -137,5 +146,4 @@ target/site/jacoco/index.html
 ![RabbitMQ imagem](/snapshots/mensages_payload.png)
 
 ### Containers Docker e Imagens Docker Hub
-
 ![Containers Docker imagem](/snapshots/dockerhub.png)
