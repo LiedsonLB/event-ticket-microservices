@@ -26,6 +26,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @Slf4j
 @Tag(name = "ms-ticket-management", description = "API for managing tickets.")
@@ -102,5 +104,16 @@ public class TicketController {
         log.info("Received request to check tickets by event ID: {}", eventId);
         List<TicketResponseDto> tickets = ticketServiceImpl.checkTicketsByEvent(eventId);
         return ResponseEntity.ok(tickets);
+    }
+
+    @Operation(summary = "Update ticket by ID.", responses = {
+            @ApiResponse(responseCode = "200", description = "Ticket updated successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TicketResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Ticket not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+    })
+    @PutMapping("/update-ticket/{id}")
+    public ResponseEntity<TicketResponseDto> updateTicket(@PathVariable Long id, @Valid @RequestBody TicketRequestDto ticketRequestDto) {
+        log.info("Received request to update ticket by ID: {}", id);
+        TicketResponseDto updatedTicket = ticketServiceImpl.updateTicket(id, ticketRequestDto);
+        return ResponseEntity.ok(updatedTicket);
     }
 }

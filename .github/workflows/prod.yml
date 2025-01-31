@@ -2,7 +2,7 @@ name: Deploy Tickets Application
 
 on:
     push:
-        branches: [main]
+        branches: [dev]
 
 jobs:
     build:
