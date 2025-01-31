@@ -2,7 +2,7 @@ name: Deploy Tickets Application
 
 on:
     push:
-        branches: [test-docker]
+        branches: [main]
 
 jobs:
     build:
