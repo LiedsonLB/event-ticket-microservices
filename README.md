@@ -4,7 +4,7 @@
 
 ## Sobre o Projeto
 
-Este projeto consiste em um sistema com arquitetura de microsserviços para gerenciamento de eventos e ingressos, como shows, teatros, concertos e exposições. O sistema é composto por dois microsserviços principais: **ms-event-manager** e **ms-ticket-manager**, que se comunicam via RabbitMQ e utilizam o MongoDB para persinstência dos dados. Além disso, o sistema consome a API ViaCEP para obter informações de endereço com base no CEP fornecido.
+Este projeto é um sistema de gerenciamento de eventos e ingressos baseado em microsserviços, composto pelos serviços ms-event-manager e ms-ticket-manager, que se comunicam via RabbitMQ e utilizam MongoDB para persistência dos dados. Além disso, consome a API ViaCEP para obter endereços a partir do CEP informado. O sistema está hospedado na AWS EC2 com deploy automatizado via GitHub Actions.
 
 ## Tecnologias Utilizadas
 
@@ -139,7 +139,7 @@ O deploy da aplicação foi automatizado com GitHub Actions, que realiza o build
 
 ### Consulta de Tickets por CPF
 
-Para buscar um ticket utilizando o CPF, utilize a seguinte rota da instância IC2:
+Para buscar um ticket utilizando o CPF, utilize a seguinte rota da instância EC2:
 
 **Método:** `GET`  
 **URL:**  
