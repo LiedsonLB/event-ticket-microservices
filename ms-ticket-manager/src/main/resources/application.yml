@@ -1,0 +1,31 @@
+spring:
+    application:
+        name: ms-ticket-manager
+    data:
+        mongodb:
+            uri: mongodb+srv://${MONGO_USER:admin}:${MONGO_PASSWORD:admin}@challenge3.axgt4.mongodb.net/?retryWrites=true&w=majority&appName=challenge3
+            database: ${MONGO_DB_TICKET:db_ticket_dev}
+    rabbitmq:
+        addresses: ${RABBITMQ_HOST:amqps://yqhbrrvd:walVSPe0UoOEyPtKbnEYKSwIA39M2rbT@shark.rmq.cloudamqp.com/yqhbrrvd}
+
+broker:
+  queue:
+    name: default.ticket
+  
+eventservice:
+  url: ${EVENT_SERVICE_URL:http://localhost:8080}/api/events/get-event
+
+server:
+  port: 8081
+
+springdoc:
+  api-docs:
+    path: /v1/api-ticket-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  packages-to-scan: com.msticket.ms_ticket_manager.controllers
+
+logging:
+  level:
+    root: INFO
+    '[com.msticket.ms_ticket_manager]': DEBUG
