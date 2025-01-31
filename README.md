@@ -48,6 +48,29 @@ Responsável pelo gerenciamento de eventos, incluindo criação, consulta, atual
 | DELETE     | `/delete-event/{id}`    | Exclui um evento pelo ID (verifica ingressos)   |
 
 ---
+Dados de Entrada: 
+```javascript
+{  
+  "eventName": "Show da Xuxa",  
+  "dateTime": "2024-12-30T21:00:00",  
+  "cep": "01020-000"  
+}  
+```
+Dados de Saída:
+```javascript
+{  
+  "id": "string",  
+  "eventName": "Show da Xuxa",  
+  "dateTime": "2024-12-30T21:00:00",  
+  "cep": "01020-000",  
+  "logradouro": "string",  
+  "bairro": "string",  
+  "cidade": "string",  
+  "uf": "string"  
+}  
+ 
+```
+---
 
 ### 2. ms-ticket-manager
 Responsável pelo gerenciamento de ingressos, incluindo criação, consulta, atualização e cancelamento de ingressos.
@@ -59,7 +82,41 @@ Responsável pelo gerenciamento de ingressos, incluindo criação, consulta, atu
 | PUT        | `/update-ticket/{id}`   | Atualiza um ingresso pelo ID                    |
 | DELETE     | `/cancel-ticket/{id}`   | Cancela um ingresso pelo ID (soft-delete)       |
 | GET        | `/check-tickets-by-event/{eventId}` | Verifica ingressos vinculados a um evento |
-
+---
+Dados de Entrada:
+```javascript
+{  
+  "eventId": "string", (auto generate - sequencial)  
+  "eventName": "string",  
+  "eventDate": "2022-12-31",  
+  "eventTime": "20:00",  
+  "eventLocation": "string",  
+  "eventAddress": "string",  
+  "eventCapacity": 1000,  
+  "eventPrice": "R$ 50,00"  
+}  
+``` 
+Dados de Saída:
+```javascript
+{  
+  "ticketId": "string", (auto generate - sequencial)  
+  "cpf": "string",  
+  "customerName": "string",  
+  "customerMail": "string",  
+  "event": {  
+    "eventId": "string",  
+    "eventName": "string",  
+    "eventDateTime": "2024-12-30T21:00:00",  
+    "logradouro": "string",  
+    "bairro": "string",  
+    "cidade": "string",  
+    "uf": "string"  
+  },  
+  "BRLtotalAmount": "R$ 50,00",  
+  "USDtotalAmount": "$ 10,00",  
+  "status": "concluído"  
+}    
+```
 ---
 
 ## Configuração do Projeto
@@ -79,6 +136,16 @@ O deploy da aplicação foi automatizado com GitHub Actions, que realiza o build
 ![MongoDB imagem](/snapshots/github_deploy.png)
 
 ![MongoDB imagem](/snapshots/github_actions.png)
+
+### Consulta de Tickets por CPF
+
+Para buscar um ticket utilizando o CPF, utilize a seguinte rota da instância IC2:
+
+**Método:** `GET`  
+**URL:**  
+```sh
+http://18.216.75.28:8081/api/tickets/get-ticket-by-cpf/08080808
+```
 
 ### Passos para Executar Localmente
 
@@ -147,3 +214,7 @@ ms-ticket-manager:
 
 ### Containers Docker e Imagens Docker Hub
 ![Containers Docker imagem](/snapshots/dockerhub.png)
+
+## Releases
+
+- Release v1.0 ✅
