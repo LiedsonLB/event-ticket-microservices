@@ -16,7 +16,7 @@ public class Event {
     @Field("eventName")
     private String eventName;
     @Field("dateTime")
-    private String eventDateTime;
+    private String dateTime;
     @Field("cep")
     private String cep;
     @Field("logradouro")
@@ -28,9 +28,9 @@ public class Event {
     @Field("uf")
     private String uf;
 
-    public Event(String eventName, String eventDateTime, String cep, String logradouro, String bairro, String cidade, String uf) {
+    public Event(String eventName, String dateTime, String cep, String logradouro, String bairro, String cidade, String uf) {
         this.eventName = eventName;
-        this.eventDateTime = eventDateTime;
+        this.dateTime = dateTime;
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;

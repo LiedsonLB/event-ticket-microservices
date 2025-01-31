@@ -41,7 +41,7 @@ public class EventServiceImpl implements EventService {
 
         Event event = new Event();
         event.setEventName(eventRequestDto.getEventName());
-        event.setEventDateTime(eventRequestDto.getEventDateTime());
+        event.setDateTime(eventRequestDto.getDateTime());
         event.setCep(eventRequestDto.getCep());
         
         event.setLogradouro(address.getLogradouro());
@@ -59,7 +59,7 @@ public class EventServiceImpl implements EventService {
         );
 
         eventToUpdate.setEventName(eventRequestDto.getEventName());
-        eventToUpdate.setEventDateTime(eventRequestDto.getEventDateTime());
+        eventToUpdate.setDateTime(eventRequestDto.getDateTime());
         eventToUpdate.setCep(eventRequestDto.getCep());
 
         AddressResponse address = viaCepClient.getInfo(eventRequestDto.getCep());

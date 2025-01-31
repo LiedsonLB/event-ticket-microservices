@@ -29,7 +29,7 @@ public class EventMapper {
 
         Event eventResponseDto = new Event();
         eventResponseDto.setEventName(eventRequestDto.getEventName());
-        eventResponseDto.setEventDateTime(eventRequestDto.getEventDateTime());
+        eventResponseDto.setDateTime(eventRequestDto.getDateTime());
         eventResponseDto.setCep(eventRequestDto.getCep());
         eventResponseDto.setLogradouro(address.getLogradouro());
         eventResponseDto.setBairro(address.getBairro());

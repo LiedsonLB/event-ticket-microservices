@@ -75,7 +75,7 @@ public class EventServiceTest {
 
         assertThat(createdEvent).isNotNull();
         assertThat(createdEvent.getEventName()).isEqualTo(requestDto.getEventName());
-        assertThat(createdEvent.getEventDateTime()).isEqualTo(requestDto.getEventDateTime());
+        assertThat(createdEvent.getDateTime()).isEqualTo(requestDto.getDateTime());
         assertThat(createdEvent.getCep()).isEqualTo(requestDto.getCep());
         assertThat(createdEvent.getLogradouro()).isEqualTo(addressResponse.getLogradouro());
         verify(eventRepository).save(any(Event.class));

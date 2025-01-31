@@ -16,15 +16,15 @@ public class EventRequestDto {
     @NotBlank(message = "name cannot be empty")
     @Size(max = 100, message = "Event name cannot exceed 100 characters.")
     private String eventName;
-    @JsonProperty("eventDateTime") @NotNull(message = "Event date and time cannot be empty")
-    private String eventDateTime;
+    @JsonProperty("dateTime") @NotNull(message = "Event date and time cannot be empty")
+    private String dateTime;
     @NotBlank(message = "cep cannot be empty")
     @Pattern(regexp = "\\d{5}-?\\d{3}", message = "Invalid CEP format")
     private String cep;
     
-    public EventRequestDto(String eventName, String eventDateTime, String cep) {
+    public EventRequestDto(String eventName, String dateTime, String cep) {
         this.eventName = eventName;
-        this.eventDateTime = eventDateTime;
+        this.dateTime = dateTime;
         this.cep = cep;
     }
 }

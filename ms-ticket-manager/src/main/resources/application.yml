@@ -13,7 +13,7 @@ broker:
     name: default.ticket
   
 eventservice:
-  url: ${EVENT_SERVICE_URL:-http://localhost:8080}/api/events/get-event
+  url: ${EVENT_SERVICE_URL:http://localhost:8080}/api/events/get-event
 
 server:
   port: 8081

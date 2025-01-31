@@ -14,19 +14,31 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class EventResponse {
-    @JsonProperty("id") 
+    @JsonProperty("id")
     private String id;
+
+    @JsonProperty("eventName")
     private String eventName;
-    private String eventDateTime;
+
+    @JsonProperty("dateTime")
+    private String dateTime;
+
+    @JsonProperty("logradouro")
     private String logradouro;
+
+    @JsonProperty("bairro")
     private String bairro;
+
+    @JsonProperty("cidade")
     private String cidade;
+
+    @JsonProperty("uf")
     private String uf;
     
-    public EventResponse(String id, String eventName, LocalDateTime eventDateTime, String logradouro, String bairro, String cidade, String uf) {
-        this.id = id;
+    public EventResponse(String eventId, String eventName, LocalDateTime eventDateTime, String logradouro, String bairro, String cidade, String uf) {
+        this.id = eventId;
         this.eventName = eventName;
-        this.eventDateTime = TicketResponseDto.formatEventDateTime(eventDateTime);
+        this.dateTime = TicketResponseDto.formatEventDateTime(eventDateTime);
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.cidade = cidade;

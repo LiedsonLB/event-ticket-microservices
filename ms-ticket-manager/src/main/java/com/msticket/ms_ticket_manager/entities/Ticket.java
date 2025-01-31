@@ -7,12 +7,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter @NoArgsConstructor
 @Document(collection = "tickets")
 public class Ticket {
     @Id
@@ -35,4 +34,15 @@ public class Ticket {
     private String USDamount;
     @Pattern(regexp = "^(concluído|cancelado)$", message = "Invalid status. Must be 'concluído' or 'pendente'")
     private String status;
+
+    public Ticket(String cpf, String customerName, String customerMail, String eventId, String eventName, String BRLamount, String USDamount, String status) {
+        this.cpf = cpf;
+        this.customerName = customerName;
+        this.customerMail = customerMail;
+        this.eventId = eventId;
+        this.eventName = eventName;
+        this.BRLamount = BRLamount;
+        this.USDamount = USDamount;
+        this.status = status;
+    }
 }

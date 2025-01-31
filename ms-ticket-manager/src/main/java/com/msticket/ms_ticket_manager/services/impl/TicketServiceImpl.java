@@ -130,6 +130,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<TicketResponseDto> checkTicketsByEvent(String eventId) {
+        if(eventId == null) {
+            throw new InvalidQueryParameterException("ID do evento não pode ser nulo.");
+        }
         List<Ticket> tickets = ticketRepository.findByEventId(eventId);
         if (tickets.isEmpty()) {
             throw new TicketNotFoundException("Nenhum ticket encontrado para o evento com ID: " + eventId);

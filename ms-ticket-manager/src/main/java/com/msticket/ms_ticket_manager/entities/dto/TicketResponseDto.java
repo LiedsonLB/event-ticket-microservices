@@ -15,13 +15,13 @@ public class TicketResponseDto {
     private String cpf;
     private String customerName;
     private String customerMail;
-    private EventResponse event;
+    private EventDto event;
 
     private String BRLtotalAmount;
     private String USDtotalAmount;
     private String status;
     
-    public TicketResponseDto(Long ticketId, String cpf, String customerName, String customerMail, EventResponse event, String BRLtotalAmount, String USDtotalAmount, String status) {
+    public TicketResponseDto(Long ticketId, String cpf, String customerName, String customerMail, EventDto event, String BRLtotalAmount, String USDtotalAmount, String status) {
         this.ticketId = ticketId;
         this.cpf = cpf;
         this.customerName = customerName;

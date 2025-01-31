@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.msticket.ms_ticket_manager.entities.EventResponse;
+import com.msticket.ms_ticket_manager.entities.dto.EventDto;
 import com.msticket.ms_ticket_manager.entities.dto.TicketRequestDto;
 import com.msticket.ms_ticket_manager.entities.dto.TicketResponseDto;
 import com.msticket.ms_ticket_manager.exceptions.EventNotFoundException;
@@ -36,9 +37,10 @@ public class TicketMapper {
 
         try {
             EventResponse eventResponse = eventClient.getEventById(ticket.getEventId());
+            EventDto eventDto = EventDto.toEvent(eventResponse);
             log.info("event found {}", ticket.getEventId());
             
-            ticketResponseDto.setEvent(eventResponse);
+            ticketResponseDto.setEvent(eventDto);
         } catch (FeignException.NotFound ex) {
             log.error("event ID {} not found: {}", ticket.getEventId(), ex.getMessage());
             throw new EventNotFoundException("event ID not found: " + ticket.getEventId() + " - " + ex.getMessage());

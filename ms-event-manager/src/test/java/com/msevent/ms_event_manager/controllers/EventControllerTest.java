@@ -36,7 +36,7 @@ public class EventControllerTest {
 
         Assertions.assertThat(sut).isNotNull();
         Assertions.assertThat(sut.getEventName()).isNotNull();
-        Assertions.assertThat(sut.getEventDateTime()).isNotNull();
+        Assertions.assertThat(sut.getDateTime()).isNotNull();
         Assertions.assertThat(sut.getCep()).isNotNull();
     }
 
