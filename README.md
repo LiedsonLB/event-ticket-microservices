@@ -85,16 +85,16 @@ Responsável pelo gerenciamento de ingressos, incluindo criação, consulta, atu
 ---
 Dados de Entrada:
 ```javascript
-{  
-  "eventId": "string", (auto generate - sequencial)  
-  "eventName": "string",  
-  "eventDate": "2022-12-31",  
-  "eventTime": "20:00",  
-  "eventLocation": "string",  
-  "eventAddress": "string",  
-  "eventCapacity": 1000,  
-  "eventPrice": "R$ 50,00"  
-}  
+{
+	"ticketId": "string",
+  "customerName": "string",
+  "cpf": "string",
+  "customerMail": "string",
+  "eventId": "string",
+  "eventName": "string",
+  "BRLamount": "R$ 50,00",
+  "USDamount": "$ 10,00",
+}
 ``` 
 Dados de Saída:
 ```javascript
