@@ -143,6 +143,7 @@ Para buscar um ticket utilizando o CPF, utilize a seguinte rota da instância EC
 
 **Método:** `GET`  
 **URL:**  
+(Descontinuado)
 ```sh
 http://18.216.75.28:8081/api/tickets/get-ticket-by-cpf/08080808
 ```
